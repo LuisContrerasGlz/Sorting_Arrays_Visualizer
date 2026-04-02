@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Array Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Sorting Array Visualizer</h1>
+    <div id="controls">
+        <select id="algorithm-select">
+            <option value="bubble">Bubble Sort</option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="merge">Merge Sort</option>
+            <option value="quick">Quick Sort</option>
+        </select>
+        <button id="start-btn">Start</button>
+        <button id="pause-btn" disabled>Pause</button>
+        <button id="reset-btn">Reset</button>
+        <label for="speed-slider">Speed:</label>
+        <input type="range" id="speed-slider" min="1" max="100" value="50">
+        <button id="step-btn" disabled>Step</button>
+        <label><input type="checkbox" id="step-mode"> Step Mode</label>
+        <input type="text" id="array-input" placeholder="Enter array (e.g., 5,3,8,1)">
+        <button id="generate-random">Random Array</button>
+    </div>
+    <canvas id="visualizer" width="800" height="400"></canvas>
+    <div id="metrics">
+        <p>Time: <span id="time">0</span> ms</p>
+        <p>Comparisons: <span id="comparisons">0</span></p>
+        <p>Swaps: <span id="swaps">0</span></p>
+    </div>
+    <div id="comparison" style="display: none;">
+        <h2>Comparison</h2>
+        <table id="comparison-table">
+            <thead>
+                <tr>
+                    <th>Algorithm</th>
+                    <th>Time (ms)</th>
+                    <th>Comparisons</th>
+                    <th>Swaps</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html></content>
+<parameter name="filePath">/Users/luisfranciscocontrerasgonzalez/Documents/Projects/Sorting_Arrays_Visualizer/index.html
