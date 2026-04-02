@@ -22,6 +22,52 @@ const explanations = {
     quick: "Quick Sort is a divide and conquer algorithm. It picks an element as pivot and partitions the given array around the picked pivot. There are many different versions of quicksort that pick pivot in different ways. It is generally faster than other O(n log n) algorithms."
 };
 
+// Algorithm details for diagram and pseudocode
+const algorithmDetails = {
+    bubble: {
+        diagram: "[5,3,8,1] -> [3,5,1,8] -> [3,1,5,8] -> [1,3,5,8]",
+        pseudocode: `for i = 0 to n-2\n    for j = 0 to n-i-2\n        if arr[j] > arr[j+1]\n            swap(arr[j], arr[j+1])`
+    },
+    insertion: {
+        diagram: "[5,3,8,1] insert 3 -> [3,5,8,1] insert 8 -> [3,5,8,1] insert 1 -> [1,3,5,8]",
+        pseudocode: `for i = 1 to n-1\n    key = arr[i]\n    j = i-1\n    while j >= 0 and arr[j] > key\n        arr[j+1] = arr[j]\n        j = j-1\n    arr[j+1] = key`
+    },
+    merge: {
+        diagram: "[5,3,8,1] -> [5,3] + [8,1] -> [3,5] + [1,8] -> [1,3,5,8]",
+        pseudocode: `mergeSort(arr, l, r)\n    if l < r\n        m = (l+r)/2\n        mergeSort(arr, l, m)\n        mergeSort(arr, m+1, r)\n        merge(arr, l, m, r)`
+    },
+    quick: {
+        diagram: "[5,3,8,1] pivot=1 -> [1,3,8,5] -> [1,3,5,8]",
+        pseudocode: `quickSort(arr, low, high)\n    if low < high\n        pi = partition(arr, low, high)\n        quickSort(arr, low, pi-1)\n        quickSort(arr, pi+1, high)`
+    }
+};
+
+const stepAnnotations = {
+    bubble: [
+        "Comparando elementos adyacentes...",
+        "Intercambio detectado, moviendo valores...",
+        "Recorriendo lista para nueva pasada..."
+    ],
+    insertion: [
+        "Tomando elemento clave y comparando hacia la izquierda...",
+        "Desplazando elementos mayores...",
+        "Insertando elemento en posición correcta..."
+    ],
+    merge: [
+        "Dividiendo el arreglo en subarreglos...",
+        "Fusionando subarreglos ordenados...",
+        "Subarreglo fusionado listo..."
+    ],
+    quick: [
+        "Seleccionando pivote...",
+        "Particionando alrededor del pivote...",
+        "Llamada recursiva a subarreglos..."
+    ]
+};
+
+let sortStep = 0;
+
+
 // DOM elements
 const canvas = document.getElementById('visualizer');
 const ctx = canvas.getContext('2d');
@@ -38,6 +84,11 @@ const comparisonsSpan = document.getElementById('comparisons');
 const swapsSpan = document.getElementById('swaps');
 const comparisonDiv = document.getElementById('comparison');
 const comparisonTableBody = document.getElementById('comparison-table').querySelector('tbody');
+const toggleMoreBtn = document.getElementById('toggle-more');
+const extendedInfo = document.getElementById('extended-info');
+const diagramDiv = document.getElementById('diagram');
+const pseudocodePre = document.getElementById('pseudocode');
+const syncStepText = document.getElementById('sync-step');
 
 // Initialize
 function init() {
@@ -62,6 +113,11 @@ function setupEventListeners() {
     document.getElementById('step-mode').addEventListener('change', (e) => {
         stepMode = e.target.checked;
         stepBtn.disabled = !stepMode || !isSorting;
+        pauseBtn.disabled = stepMode; // no pause for step mode
+    });
+    toggleMoreBtn.addEventListener('click', () => {
+        extendedInfo.classList.toggle('hidden');
+        toggleMoreBtn.textContent = extendedInfo.classList.contains('hidden') ? 'Ver más' : 'Ver menos';
     });
     generateRandomBtn.addEventListener('click', () => {
         generateRandomArray();
@@ -84,6 +140,12 @@ function setupEventListeners() {
 function updateExplanation() {
     const text = explanations[currentAlgorithm];
     document.getElementById('explanation-text').textContent = text;
+
+    const details = algorithmDetails[currentAlgorithm];
+    diagramDiv.textContent = details.diagram;
+    pseudocodePre.textContent = details.pseudocode;
+    sortStep = 0;
+    updateSyncStep();
 }
 
 function generateRandomArray(size = 50) {
@@ -170,8 +232,10 @@ function stepSort() {
         if (done) {
             finishSorting();
         } else if (value) {
+            sortStep++;
             drawArray(value.highlights || []);
             updateMetrics();
+            updateSyncStep();
         }
     }
 }
@@ -188,8 +252,10 @@ function animateSorting(generator) {
             return;
         }
         if (value) {
+            sortStep++;
             drawArray(value.highlights || []);
             updateMetrics();
+            updateSyncStep();
         }
         setTimeout(() => {
             animationId = requestAnimationFrame(animate);
@@ -205,6 +271,7 @@ function finishSorting() {
     stepBtn.disabled = true;
     drawArray();
     updateMetrics();
+    syncStepText.textContent = 'Ordenamiento completado';
     generator = null;
     addToComparison();
 }
@@ -213,6 +280,12 @@ function updateMetrics() {
     timeSpan.textContent = Date.now() - startTime;
     comparisonsSpan.textContent = comparisons;
     swapsSpan.textContent = swaps;
+}
+
+function updateSyncStep() {
+    const annotationList = stepAnnotations[currentAlgorithm] || [];
+    const text = annotationList[sortStep % annotationList.length] || 'Ejecutando paso...';
+    syncStepText.textContent = `Paso ${sortStep + 1}: ${text}`;
 }
 
 function addToComparison() {

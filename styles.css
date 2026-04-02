@@ -46,6 +46,40 @@ canvas {
     margin: 20px 0;
 }
 
+#extended-info {
+    margin-top: 12px;
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 10px;
+    text-align: left;
+}
+
+#extended-info.hidden {
+    display: none;
+}
+
+.diagram {
+    font-family: monospace;
+    background: #f4f8ff;
+    border: 1px solid #d0e4ff;
+    padding: 10px;
+    margin-bottom: 10px;
+    white-space: pre-line;
+}
+
+.pseudocode {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-family: monospace;
+    white-space: pre;
+}
+
+.sync-step {
+    font-weight: bold;
+    margin-top: 6px;
+}
+
 table {
     margin: 0 auto;
     border-collapse: collapse;
