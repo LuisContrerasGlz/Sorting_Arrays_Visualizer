@@ -14,6 +14,14 @@ let stepMode = false;
 let generator = null;
 let comparisonData = [];
 
+// Algorithm explanations
+const explanations = {
+    bubble: "Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. It gets its name because smaller elements 'bubble' to the top of the list.",
+    insertion: "Insertion Sort builds the final sorted array one item at a time. It is much less efficient on large lists than more advanced algorithms. It works by taking elements from the list one by one and inserting them in their correct position into a new sorted list.",
+    merge: "Merge Sort is a divide and conquer algorithm. It divides the input array into two halves, calls itself for the two halves, and then merges the two sorted halves. The merge() function is used for merging two halves. It is efficient and stable.",
+    quick: "Quick Sort is a divide and conquer algorithm. It picks an element as pivot and partitions the given array around the picked pivot. There are many different versions of quicksort that pick pivot in different ways. It is generally faster than other O(n log n) algorithms."
+};
+
 // DOM elements
 const canvas = document.getElementById('visualizer');
 const ctx = canvas.getContext('2d');
@@ -35,12 +43,14 @@ const comparisonTableBody = document.getElementById('comparison-table').querySel
 function init() {
     generateRandomArray();
     drawArray();
+    updateExplanation();
     setupEventListeners();
 }
 
 function setupEventListeners() {
     algorithmSelect.addEventListener('change', () => {
         currentAlgorithm = algorithmSelect.value;
+        updateExplanation();
     });
     startBtn.addEventListener('click', startSorting);
     pauseBtn.addEventListener('click', togglePause);
@@ -69,6 +79,11 @@ function setupEventListeners() {
             }
         }
     });
+}
+
+function updateExplanation() {
+    const text = explanations[currentAlgorithm];
+    document.getElementById('explanation-text').textContent = text;
 }
 
 function generateRandomArray(size = 50) {

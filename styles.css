@@ -8,6 +8,17 @@ h1 {
     color: #333;
 }
 
+#explanation {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+#explanation h2 {
+    margin-top: 0;
+}
+
 #controls {
     margin: 20px 0;
 }
