@@ -44,24 +44,24 @@ const algorithmDetails = {
 
 const stepAnnotations = {
     bubble: [
-        "Comparando elementos adyacentes...",
-        "Intercambio detectado, moviendo valores...",
-        "Recorriendo lista para nueva pasada..."
+        "Comparing adjacent elements...",
+        "Swap detected, moving values...",
+        "Traversing list for next pass..."
     ],
     insertion: [
-        "Tomando elemento clave y comparando hacia la izquierda...",
-        "Desplazando elementos mayores...",
-        "Insertando elemento en posición correcta..."
+        "Taking key element and comparing leftward...",
+        "Shifting larger elements...",
+        "Inserting element at correct position..."
     ],
     merge: [
-        "Dividiendo el arreglo en subarreglos...",
-        "Fusionando subarreglos ordenados...",
-        "Subarreglo fusionado listo..."
+        "Dividing array into subarrays...",
+        "Merging sorted subarrays...",
+        "Subarray merge completed..."
     ],
     quick: [
-        "Seleccionando pivote...",
-        "Particionando alrededor del pivote...",
-        "Llamada recursiva a subarreglos..."
+        "Selecting pivot...",
+        "Partitioning around pivot...",
+        "Recursive call on subarrays..."
     ]
 };
 
@@ -117,7 +117,7 @@ function setupEventListeners() {
     });
     toggleMoreBtn.addEventListener('click', () => {
         extendedInfo.classList.toggle('hidden');
-        toggleMoreBtn.textContent = extendedInfo.classList.contains('hidden') ? 'Ver más' : 'Ver menos';
+        toggleMoreBtn.textContent = extendedInfo.classList.contains('hidden') ? 'See More' : 'See Less';
     });
     generateRandomBtn.addEventListener('click', () => {
         generateRandomArray();
@@ -271,7 +271,7 @@ function finishSorting() {
     stepBtn.disabled = true;
     drawArray();
     updateMetrics();
-    syncStepText.textContent = 'Ordenamiento completado';
+    syncStepText.textContent = 'Sorting completed';
     generator = null;
     addToComparison();
 }
@@ -284,8 +284,8 @@ function updateMetrics() {
 
 function updateSyncStep() {
     const annotationList = stepAnnotations[currentAlgorithm] || [];
-    const text = annotationList[sortStep % annotationList.length] || 'Ejecutando paso...';
-    syncStepText.textContent = `Paso ${sortStep + 1}: ${text}`;
+    const text = annotationList[sortStep % annotationList.length] || 'Executing step...';
+    syncStepText.textContent = `Step ${sortStep + 1}: ${text}`;
 }
 
 function addToComparison() {

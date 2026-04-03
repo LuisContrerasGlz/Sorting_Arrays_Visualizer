@@ -50,8 +50,8 @@ A web-based educational tool that visualizes how sorting algorithms work in real
 ### Algorithm Explanations
 
 1. Select any algorithm to view its description
-2. Click "Ver más" to expand and see the pseudocode and conceptual diagram
-3. During sorting, "Paso N" displays contextual information about the current operation
+2. Click "See More" to expand and see the pseudocode and conceptual diagram
+3. During sorting, "Step N" displays contextual information about the current operation
 
 ### Performance Comparison
 
@@ -65,19 +65,43 @@ A web-based educational tool that visualizes how sorting algorithms work in real
 
 ### Bubble Sort
 
-Repeatedly compares adjacent elements and swaps them if in wrong order. Simple but inefficient for large datasets. Time complexity: O(n^2).
+Repeatedly compares adjacent elements and swaps them if in wrong order. Simple but inefficient for large datasets.
+
+Big O Notation:
+- Best case: O(n) - when array is already sorted
+- Average case: O(n^2)
+- Worst case: O(n^2) - when array is reverse sorted
+- Space complexity: O(1)
 
 ### Insertion Sort
 
-Builds sorted array by inserting elements one at a time into correct position. Efficient for small datasets. Time complexity: O(n^2).
+Builds sorted array by inserting elements one at a time into correct position. Efficient for small datasets.
+
+Big O Notation:
+- Best case: O(n) - when array is already sorted
+- Average case: O(n^2)
+- Worst case: O(n^2) - when array is reverse sorted
+- Space complexity: O(1)
 
 ### Merge Sort
 
-Divides array in half, recursively sorts each half, then merges them. Predictable performance and stable sort. Time complexity: O(n log n).
+Divides array in half, recursively sorts each half, then merges them. Predictable performance and stable sort.
+
+Big O Notation:
+- Best case: O(n log n)
+- Average case: O(n log n)
+- Worst case: O(n log n)
+- Space complexity: O(n)
 
 ### Quick Sort
 
-Selects pivot and partitions array around it, then recursively sorts partitions. Generally fastest in practice. Time complexity: O(n log n) average.
+Selects pivot and partitions array around it, then recursively sorts partitions. Generally fastest in practice.
+
+Big O Notation:
+- Best case: O(n log n)
+- Average case: O(n log n)
+- Worst case: O(n^2) - when pivot selection is poor
+- Space complexity: O(log n)
 
 ## Project Structure
 
