@@ -168,3 +168,4 @@ This tool is designed for:
 **GitHub Pages:**  
 https://luiscontrerasglz.github.io/Sorting_Arrays_Visualizer/
 
+![Working app image](./assets/app.png)
