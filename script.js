@@ -5,7 +5,9 @@ let array = [];
 let isSorting = false;
 let isPaused = false;
 let currentAlgorithm = 'bubble';
-let speed = 50; // ms delay
+let speed = 500; // ms delay
+const SPEED_MIN_MS = 10;
+const SPEED_MAX_MS = 1000;
 let comparisons = 0;
 let swaps = 0;
 let startTime = 0;
@@ -107,7 +109,7 @@ function setupEventListeners() {
     pauseBtn.addEventListener('click', togglePause);
     resetBtn.addEventListener('click', reset);
     speedSlider.addEventListener('input', () => {
-        speed = 101 - speedSlider.value; // Invert so higher value = faster
+        speed = (101 - speedSlider.value) * 10; // Invert so higher slider = faster, with a larger delay range
     });
     stepBtn.addEventListener('click', stepSort);
     document.getElementById('step-mode').addEventListener('change', (e) => {
